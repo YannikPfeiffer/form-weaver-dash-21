@@ -9,10 +9,11 @@ const mockForms: FormData[] = [
   {
     id: "1",
     name: "Microsoft Corporation",
+    fileName: "microsoft-proposal.pdf",
     type: "Proposal",
     status: "in-progress",
     progress: 75,
-    createdAt: "5/2/25, 10:20 AM",
+    createdAt: "5/2/25",
     deadline: "5/20/25, 5:00 PM",
     contributors: [
       { id: "1", name: "John Doe", initials: "JD" },
@@ -21,28 +22,40 @@ const mockForms: FormData[] = [
       { id: "4", name: "Sarah Wilson", initials: "SW" },
       { id: "5", name: "Tom Brown", initials: "TB" },
     ],
+    customer: {
+      name: "Sarah Johnson",
+      company: "Microsoft Corp",
+      email: "s.johnson@microsoft.com"
+    }
   },
   {
     id: "2",
     name: "Google LLC",
+    fileName: "google-contract.pdf",
     type: "Contract",
     status: "completed",
     progress: 100,
-    createdAt: "4/15/25, 1:05 PM",
+    createdAt: "4/15/25",
     deadline: "5/1/25, 5:00 PM",
     contributors: [
       { id: "1", name: "Alice Cooper", initials: "AC" },
       { id: "2", name: "Bob Miller", initials: "BM" },
       { id: "3", name: "Carol Davis", initials: "CD" },
     ],
+    customer: {
+      name: "Michael Chen",
+      company: "Google LLC",
+      email: "m.chen@google.com"
+    }
   },
   {
     id: "3",
     name: "Amazon Web Services",
+    fileName: "aws-report.xlsx",
     type: "Report",
     status: "review",
     progress: 95,
-    createdAt: "4/20/25, 4:15 PM",
+    createdAt: "4/20/25",
     deadline: "6/10/25, 11:00 AM",
     contributors: [
       { id: "1", name: "David Lee", initials: "DL" },
@@ -50,48 +63,71 @@ const mockForms: FormData[] = [
       { id: "3", name: "Frank Chen", initials: "FC" },
       { id: "4", name: "Grace Kim", initials: "GK" },
     ],
+    customer: {
+      name: "Lisa Rodriguez",
+      company: "Amazon Web Services",
+      email: "l.rodriguez@aws.com"
+    }
   },
   {
     id: "4",
     name: "Tesla Inc",
+    fileName: "tesla-agreement.docx",
     type: "Agreement",
     status: "review",
     progress: 100,
-    createdAt: "1/30/25, 10:50 AM",
+    createdAt: "1/30/25",
     deadline: "5/28/25, 3:00 PM",
     contributors: [
       { id: "1", name: "Helen Park", initials: "HP" },
       { id: "2", name: "Ivan Petrov", initials: "IP" },
       { id: "3", name: "Julia Roberts", initials: "JR" },
     ],
+    customer: {
+      name: "Robert Kim",
+      company: "Tesla Inc",
+      email: "r.kim@tesla.com"
+    }
   },
   {
     id: "5",
     name: "Apple Inc",
+    fileName: "apple-application.pdf",
     type: "Application",
     status: "in-progress",
     progress: 25,
-    createdAt: "1/6/25, 8:30 AM",
+    createdAt: "1/6/25",
     deadline: "4/2/25, 1:20 PM",
     contributors: [
       { id: "1", name: "Kevin Liu", initials: "KL" },
       { id: "2", name: "Linda Zhang", initials: "LZ" },
     ],
+    customer: {
+      name: "Jennifer Wu",
+      company: "Apple Inc",
+      email: "j.wu@apple.com"
+    },
     isOverdue: true,
   },
   {
     id: "6",
     name: "Meta Platforms",
+    fileName: "meta-survey.pdf",
     type: "Survey",
     status: "in-progress",
     progress: 40,
-    createdAt: "10/1/24, 2:45 PM",
+    createdAt: "10/1/24",
     deadline: "5/5/25, 9:00 AM",
     contributors: [
       { id: "1", name: "Mark Taylor", initials: "MT" },
       { id: "2", name: "Nancy Brown", initials: "NB" },
       { id: "3", name: "Oscar Garcia", initials: "OG" },
     ],
+    customer: {
+      name: "David Martinez",
+      company: "Meta Platforms",
+      email: "d.martinez@meta.com"
+    }
   },
 ];
 

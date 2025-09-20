@@ -4,7 +4,8 @@ import { DashboardLayout } from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Send, FileText } from "lucide-react";
+import { ArrowLeft, Send, FileText, Users, Building2, Mail, Phone } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 
 const DocumentProcessing = () => {
@@ -16,6 +17,25 @@ const DocumentProcessing = () => {
   const [processingProgress, setProcessingProgress] = useState(0);
   const [isProcessed, setIsProcessed] = useState(false);
   const [answersProgress, setAnswersProgress] = useState(0);
+  const [pendingAnswers] = useState(3);
+  const [chatMessage, setChatMessage] = useState("");
+
+  // Mock customer data
+  const customerInfo = {
+    name: "Sarah Johnson",
+    company: "Microsoft Corporation", 
+    email: "s.johnson@microsoft.com",
+    phone: "+1 (555) 123-4567"
+  };
+
+  // Mock collaborators
+  const collaborators = [
+    { id: "1", name: "John Doe", initials: "JD", avatar: "" },
+    { id: "2", name: "Jane Smith", initials: "JS", avatar: "" },
+    { id: "3", name: "Mike Johnson", initials: "MJ", avatar: "" },
+    { id: "4", name: "Sarah Wilson", initials: "SW", avatar: "" },
+    { id: "5", name: "Tom Brown", initials: "TB", avatar: "" },
+  ];
 
 
   useEffect(() => {
@@ -120,61 +140,133 @@ const DocumentProcessing = () => {
 
               {/* Right - Analysis Panel */}
               <div className="w-1/2 flex flex-col gap-4">
-                {/* Answers Progress */}
+                {/* Customer Info */}
                 <Card className="shadow-card">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-foreground">Processing Status</CardTitle>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg font-semibold text-foreground flex items-center gap-2">
+                      <Building2 className="h-4 w-4 text-primary" />
+                      Customer Information
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">Answers filled:</span>
-                        <span className="text-sm font-medium text-foreground">{answersProgress}%</span>
+                  <CardContent className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Users className="h-4 w-4 text-muted-foreground" />
+                      <span className="font-medium text-foreground">{customerInfo.name}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">{customerInfo.company}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Mail className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">{customerInfo.email}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Phone className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">{customerInfo.phone}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Processing Status - Compact */}
+                <Card className="shadow-card">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-base font-semibold text-foreground">Processing Status</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Answers filled:</span>
+                      <span className="text-sm font-medium text-foreground">{answersProgress}%</span>
+                    </div>
+                    <Progress value={answersProgress} className="h-2" />
+                    
+                    {/* Compact Collaborators */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="flex -space-x-2">
+                          {collaborators.slice(0, 4).map((collaborator) => (
+                            <Avatar key={collaborator.id} className="h-6 w-6 border-2 border-card">
+                              <AvatarImage src={collaborator.avatar} alt={collaborator.name} />
+                              <AvatarFallback className="text-xs font-semibold bg-primary text-primary-foreground">
+                                {collaborator.initials}
+                              </AvatarFallback>
+                            </Avatar>
+                          ))}
+                          {collaborators.length > 4 && (
+                            <div className="h-6 w-6 rounded-full bg-muted border-2 border-card flex items-center justify-center">
+                              <span className="text-xs font-semibold text-muted-foreground">
+                                +{collaborators.length - 4}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        <span className="text-xs text-muted-foreground">{pendingAnswers} pending</span>
                       </div>
-                      <Progress value={answersProgress} />
+                      <Button variant="ghost" size="sm" className="h-6 text-xs">
+                        View All
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
 
                 {/* Pending Answers Preview */}
                 <Card className="shadow-card">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-foreground">Pending Collaborator Input</CardTitle>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-base font-semibold text-foreground">Pending Items</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-3">
-                      <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                        <p className="text-sm font-medium text-amber-800">Environmental Certifications</p>
-                        <p className="text-xs text-amber-600 mt-1">Waiting for compliance team review</p>
+                    <div className="space-y-2">
+                      <div className="p-2 bg-amber-50 border border-amber-200 rounded-lg">
+                        <p className="text-xs font-medium text-amber-800">Environmental Certifications</p>
+                        <p className="text-xs text-amber-600">Compliance team review</p>
                       </div>
-                      <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                        <p className="text-sm font-medium text-blue-800">Financial Information</p>
-                        <p className="text-xs text-blue-600 mt-1">Pending finance department approval</p>
+                      <div className="p-2 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p className="text-xs font-medium text-blue-800">Financial Information</p>
+                        <p className="text-xs text-blue-600">Finance department approval</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* AI Chat Bot */}
+                {/* AI Chat - ChatGPT Style */}
                 <Card className="shadow-card flex-1">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-foreground">AI Assistant</CardTitle>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-base font-semibold text-foreground">AI Assistant</CardTitle>
                   </CardHeader>
                   <CardContent className="flex flex-col h-full">
-                    <div className="flex-1 bg-muted/30 border border-border rounded-lg p-4 min-h-[200px]">
-                      <div className="space-y-3">
-                        <div className="bg-background p-3 rounded-lg border">
-                          <p className="text-sm text-muted-foreground">💡 <strong>AI:</strong> I've analyzed your document and auto-filled {answersProgress}% of the questions. Ask me anything about the document or where to find specific information!</p>
+                    <div className="flex-1 bg-muted/20 rounded-lg p-3 min-h-[200px] space-y-3 overflow-y-auto">
+                      {/* AI Message */}
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-xs font-bold text-primary-foreground">AI</span>
+                        </div>
+                        <div className="bg-background rounded-lg p-3 border flex-1">
+                          <p className="text-sm text-foreground">
+                            I've analyzed your document and auto-filled {answersProgress}% of the questions. 
+                            I found information about environmental compliance and financial data that needs review. 
+                            How can I help you today?
+                          </p>
                         </div>
                       </div>
                     </div>
-                    <div className="mt-4 flex gap-2">
+                    
+                    {/* Chat Input */}
+                    <div className="mt-3 flex gap-2">
                       <input 
                         type="text" 
-                        placeholder="Ask about the document..." 
-                        className="flex-1 px-3 py-2 border border-border rounded-lg text-sm"
+                        placeholder="Ask about the document..."
+                        value={chatMessage}
+                        onChange={(e) => setChatMessage(e.target.value)}
+                        className="flex-1 px-3 py-2 border border-border rounded-lg text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                        onKeyPress={(e) => e.key === 'Enter' && setChatMessage("")}
                       />
-                      <Button size="sm">Ask</Button>
+                      <Button 
+                        size="sm" 
+                        onClick={() => setChatMessage("")}
+                        disabled={!chatMessage.trim()}
+                      >
+                        Send
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
