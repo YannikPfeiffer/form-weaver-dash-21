@@ -4,7 +4,6 @@ import { DashboardLayout } from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, Send, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -17,15 +16,7 @@ const DocumentProcessing = () => {
   const [processingProgress, setProcessingProgress] = useState(0);
   const [isProcessed, setIsProcessed] = useState(false);
   const [answersProgress, setAnswersProgress] = useState(0);
-  const [selectedContributors, setSelectedContributors] = useState<string[]>([]);
 
-  const contributors = [
-    "Sarah Johnson - Legal Team",
-    "Michael Chen - Compliance Officer", 
-    "Emma Davis - Risk Management",
-    "Robert Wilson - Operations Manager",
-    "Lisa Anderson - Quality Assurance"
-  ];
 
   useEffect(() => {
     // Simulate document processing
@@ -45,27 +36,11 @@ const DocumentProcessing = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleContributorChange = (contributor: string, checked: boolean) => {
-    if (checked) {
-      setSelectedContributors([...selectedContributors, contributor]);
-    } else {
-      setSelectedContributors(selectedContributors.filter(c => c !== contributor));
-    }
-  };
 
   const handleSend = () => {
-    if (selectedContributors.length === 0) {
-      toast({
-        title: "No contributors selected",
-        description: "Please select at least one contributor.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     toast({
       title: "Document sent successfully",
-      description: `Document sent to ${selectedContributors.length} contributor(s).`,
+      description: "Document has been sent for collaboration.",
     });
 
     // Navigate back to dashboard after a short delay
@@ -79,8 +54,12 @@ const DocumentProcessing = () => {
   };
 
   return (
-    <DashboardLayout title="Document Processing">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <DashboardLayout 
+      title="Document Processing" 
+      showSearch={false} 
+      showUploadButton={false}
+    >
+      <div className="h-full flex flex-col space-y-6">
         <Button 
           variant="ghost" 
           onClick={handleBack}
@@ -115,138 +94,105 @@ const DocumentProcessing = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-6">
-            {/* Document with answers filled */}
-            <Card className="shadow-card">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl font-bold text-foreground">
-                    Auto-filled Document
-                  </CardTitle>
-                  <div className="text-right">
-                    <div className="text-sm text-muted-foreground mb-1">
-                      Answers filled: {answersProgress}%
-                    </div>
-                    <Progress value={answersProgress} className="w-32" />
-                  </div>
-                </div>
-              </CardHeader>
-              
-              <CardContent>
-                <div className="bg-muted/30 border border-border rounded-lg p-6 min-h-[400px]">
-                  <div className="flex items-center gap-3 mb-6">
-                    <FileText className="h-6 w-6 text-primary" />
-                    <h3 className="text-lg font-semibold text-foreground">
-                      Supplier Questionnaire - ONI Wärmetrafo GmbH
-                    </h3>
-                  </div>
-                  
-                  <div className="space-y-4 text-sm">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="font-medium text-foreground">Company Name:</label>
-                        <div className="bg-success/20 px-2 py-1 rounded mt-1">
-                          <span className="text-foreground">Rapid Comply Solutions GmbH</span>
-                        </div>
-                      </div>
-                      <div>
-                        <label className="font-medium text-foreground">Registration Number:</label>
-                        <div className="bg-success/20 px-2 py-1 rounded mt-1">
-                          <span className="text-foreground">HRB 123456</span>
-                        </div>
+          <div className="flex-1 flex flex-col">
+            {/* Split Layout */}
+            <div className="flex-1 flex gap-6">
+              {/* Left - PDF Viewer */}
+              <div className="w-1/2">
+                <Card className="shadow-card h-full">
+                  <CardHeader>
+                    <CardTitle className="text-lg font-semibold text-foreground flex items-center gap-2">
+                      <FileText className="h-5 w-5 text-primary" />
+                      {fileName}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="h-full">
+                    <div className="bg-muted/30 border border-border rounded-lg h-full min-h-[600px] flex items-center justify-center">
+                      <div className="text-center">
+                        <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                        <p className="text-muted-foreground">PDF Viewer</p>
+                        <p className="text-sm text-muted-foreground mt-2">Document preview would appear here</p>
                       </div>
                     </div>
-                    
-                    <div>
-                      <label className="font-medium text-foreground">Business Address:</label>
-                      <div className="bg-success/20 px-2 py-1 rounded mt-1">
-                        <span className="text-foreground">Musterstraße 123, 12345 Berlin, Germany</span>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="font-medium text-foreground">Industry Sector:</label>
-                        <div className="bg-success/20 px-2 py-1 rounded mt-1">
-                          <span className="text-foreground">Compliance & Risk Management</span>
-                        </div>
-                      </div>
-                      <div>
-                        <label className="font-medium text-foreground">Number of Employees:</label>
-                        <div className="bg-success/20 px-2 py-1 rounded mt-1">
-                          <span className="text-foreground">250-500</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <label className="font-medium text-foreground">Quality Management System:</label>
-                      <div className="bg-success/20 px-2 py-1 rounded mt-1">
-                        <span className="text-foreground">ISO 9001:2015 certified</span>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <label className="font-medium text-foreground">Environmental Management:</label>
-                      <div className="bg-success/20 px-2 py-1 rounded mt-1">
-                        <span className="text-foreground">ISO 14001:2015 certified, Carbon neutral operations</span>
-                      </div>
-                    </div>
-                    
-                    <div className="text-xs text-muted-foreground mt-4 p-3 bg-muted/50 rounded">
-                      <strong>Auto-filled sections:</strong> Company information, certifications, compliance status, risk assessment. 
-                      Green highlights indicate automatically populated fields based on document analysis.
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              </div>
 
-            {/* Contributors selection */}
-            <Card className="shadow-card">
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold text-foreground">
-                  Select Contributors
-                </CardTitle>
-              </CardHeader>
-              
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground text-sm">
-                  Choose team members to review and collaborate on this document:
-                </p>
-                
-                <div className="space-y-3">
-                  {contributors.map((contributor) => (
-                    <div key={contributor} className="flex items-center space-x-3">
-                      <Checkbox
-                        id={contributor}
-                        checked={selectedContributors.includes(contributor)}
-                        onCheckedChange={(checked) => 
-                          handleContributorChange(contributor, checked as boolean)
-                        }
-                      />
-                      <label 
-                        htmlFor={contributor}
-                        className="text-sm text-foreground cursor-pointer"
-                      >
-                        {contributor}
-                      </label>
+              {/* Right - Analysis Panel */}
+              <div className="w-1/2 flex flex-col gap-4">
+                {/* Answers Progress */}
+                <Card className="shadow-card">
+                  <CardHeader>
+                    <CardTitle className="text-lg font-semibold text-foreground">Processing Status</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-muted-foreground">Answers filled:</span>
+                        <span className="text-sm font-medium text-foreground">{answersProgress}%</span>
+                      </div>
+                      <Progress value={answersProgress} />
                     </div>
-                  ))}
-                </div>
-                
-                <div className="pt-4">
-                  <Button 
-                    onClick={handleSend}
-                    className="w-full"
-                    disabled={selectedContributors.length === 0}
-                  >
-                    <Send className="h-4 w-4 mr-2" />
-                    Send to Contributors ({selectedContributors.length})
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+
+                {/* Pending Answers Preview */}
+                <Card className="shadow-card">
+                  <CardHeader>
+                    <CardTitle className="text-lg font-semibold text-foreground">Pending Collaborator Input</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                        <p className="text-sm font-medium text-amber-800">Environmental Certifications</p>
+                        <p className="text-xs text-amber-600 mt-1">Waiting for compliance team review</p>
+                      </div>
+                      <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p className="text-sm font-medium text-blue-800">Financial Information</p>
+                        <p className="text-xs text-blue-600 mt-1">Pending finance department approval</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* AI Chat Bot */}
+                <Card className="shadow-card flex-1">
+                  <CardHeader>
+                    <CardTitle className="text-lg font-semibold text-foreground">AI Assistant</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex flex-col h-full">
+                    <div className="flex-1 bg-muted/30 border border-border rounded-lg p-4 min-h-[200px]">
+                      <div className="space-y-3">
+                        <div className="bg-background p-3 rounded-lg border">
+                          <p className="text-sm text-muted-foreground">💡 <strong>AI:</strong> I've analyzed your document and auto-filled {answersProgress}% of the questions. Ask me anything about the document or where to find specific information!</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4 flex gap-2">
+                      <input 
+                        type="text" 
+                        placeholder="Ask about the document..." 
+                        className="flex-1 px-3 py-2 border border-border rounded-lg text-sm"
+                      />
+                      <Button size="sm">Ask</Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Footer with Send Button */}
+            <div className="border-t border-border bg-card/50 p-4 mt-6">
+              <div className="flex justify-end">
+                <Button 
+                  onClick={handleSend}
+                  className="px-8"
+                >
+                  <Send className="h-4 w-4 mr-2" />
+                  Send
+                </Button>
+              </div>
+            </div>
           </div>
         )}
       </div>

@@ -40,6 +40,10 @@ const Upload = () => {
       setUploadProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
+          // Auto redirect to document processing
+          setTimeout(() => {
+            navigate(`/document-processing?fileName=${encodeURIComponent(file?.name || "document")}`);
+          }, 500);
           return 100;
         }
         return prev + 10;
@@ -117,16 +121,12 @@ const Upload = () => {
                   </div>
                 )}
 
-                {!uploading ? (
+                {!uploading && (
                   <Button onClick={handleUpload} className="w-full">
                     <UploadIcon className="h-4 w-4 mr-2" />
                     Upload Document
                   </Button>
-                ) : uploadProgress === 100 ? (
-                  <Button onClick={handleSubmit} className="w-full">
-                    Submit for Processing
-                  </Button>
-                ) : null}
+                )}
               </div>
             )}
           </CardContent>

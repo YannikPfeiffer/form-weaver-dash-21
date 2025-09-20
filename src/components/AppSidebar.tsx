@@ -24,15 +24,13 @@ const navigationItems = [
     url: "/analytics",
     icon: BarChart3,
   },
+];
+
+const bottomNavigationItems = [
   {
     title: "Settings",
     url: "/settings",
     icon: Settings,
-  },
-  {
-    title: "User Profile",
-    url: "/profile",
-    icon: User,
   },
 ];
 
@@ -41,52 +39,74 @@ export function AppSidebar() {
   const collapsed = state === "collapsed";
 
   return (
-    <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible="icon">
-      <SidebarContent className="bg-card border-r border-border">
-        {/* User Profile Section */}
+    <Sidebar className="w-16" collapsible="icon">
+      <SidebarContent className="bg-card border-r border-border flex flex-col h-full">
+        {/* User Profile Section - Compact */}
         <div className="p-4 border-b border-border">
-          <div className="flex items-center gap-3">
-            <Avatar className="h-10 w-10">
+          <div className="flex items-center justify-center">
+            <Avatar className="h-8 w-8">
               <AvatarImage src="/avatars/user.jpg" alt="Jane Doe" />
-              <AvatarFallback className="bg-primary text-primary-foreground font-semibold">
+              <AvatarFallback className="bg-primary text-primary-foreground font-semibold text-xs">
                 JD
               </AvatarFallback>
             </Avatar>
-            {!collapsed && (
-              <div className="flex flex-col">
-                <span className="text-sm font-semibold text-foreground">Jane Doe</span>
-                <span className="text-xs text-muted-foreground">Administrator</span>
-              </div>
-            )}
           </div>
         </div>
 
-        {/* Navigation */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-4">
-            Navigation
-          </SidebarGroupLabel>
+        {/* Main Navigation */}
+        <SidebarGroup className="flex-1">
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-2">
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    className="mx-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground"
+                    className="mx-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground w-10 h-10 p-0 flex items-center justify-center"
                   >
                     <NavLink
                       to={item.url}
                       end
                       className={({ isActive }) =>
-                        `flex items-center gap-3 px-3 py-2 text-sm font-medium ${
+                        `flex items-center justify-center w-full h-full ${
                           isActive
                             ? "bg-primary text-primary-foreground shadow-sm"
-                            : "text-muted-foreground"
+                            : "text-foreground"
                         }`
                       }
+                      title={item.title}
                     >
-                      <item.icon className="h-4 w-4 flex-shrink-0" />
-                      {!collapsed && <span>{item.title}</span>}
+                      <item.icon className="h-5 w-5 flex-shrink-0" />
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Bottom Navigation */}
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {bottomNavigationItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton
+                    asChild
+                    className="mx-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground w-10 h-10 p-0 flex items-center justify-center"
+                  >
+                    <NavLink
+                      to={item.url}
+                      end
+                      className={({ isActive }) =>
+                        `flex items-center justify-center w-full h-full ${
+                          isActive
+                            ? "bg-primary text-primary-foreground shadow-sm"
+                            : "text-foreground"
+                        }`
+                      }
+                      title={item.title}
+                    >
+                      <item.icon className="h-5 w-5 flex-shrink-0" />
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
