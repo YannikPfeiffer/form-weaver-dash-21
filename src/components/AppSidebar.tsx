@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { FileText, Settings, User, BarChart3 } from "lucide-react";
+import { FileText, Settings, BarChart3 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,

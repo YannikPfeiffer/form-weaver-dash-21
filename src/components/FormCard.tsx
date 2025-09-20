@@ -1,4 +1,14 @@
-import { Calendar, MoreVertical, FileText, File, FileImage, FileVideo, FileSpreadsheet, FileCode } from "lucide-react";
+import {
+  Calendar,
+  MoreVertical,
+  FileText,
+  File,
+  FileImage,
+  FileVideo,
+  FileSpreadsheet,
+  FileCode,
+  Clock,
+} from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -53,29 +63,29 @@ const statusConfig = {
 };
 
 const getFileIcon = (fileName: string) => {
-  const ext = fileName.toLowerCase().split('.').pop();
+  const ext = fileName.toLowerCase().split(".").pop();
   switch (ext) {
-    case 'pdf':
+    case "pdf":
       return FileText;
-    case 'doc':
-    case 'docx':
+    case "doc":
+    case "docx":
       return FileText;
-    case 'xls':
-    case 'xlsx':
+    case "xls":
+    case "xlsx":
       return FileSpreadsheet;
-    case 'jpg':
-    case 'jpeg':
-    case 'png':
-    case 'gif':
+    case "jpg":
+    case "jpeg":
+    case "png":
+    case "gif":
       return FileImage;
-    case 'mp4':
-    case 'avi':
-    case 'mov':
+    case "mp4":
+    case "avi":
+    case "mov":
       return FileVideo;
-    case 'js':
-    case 'ts':
-    case 'html':
-    case 'css':
+    case "js":
+    case "ts":
+    case "html":
+    case "css":
       return FileCode;
     default:
       return File;
@@ -96,7 +106,9 @@ export function FormCard({ form }: { form: FormData }) {
               <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors truncate">
                 {form.fileName}
               </h3>
-              <p className="text-sm text-muted-foreground truncate">{form.name}</p>
+              <p className="text-sm text-muted-foreground truncate">
+                {form.name}
+              </p>
             </div>
           </div>
           <DropdownMenu>
@@ -109,25 +121,38 @@ export function FormCard({ form }: { form: FormData }) {
               <DropdownMenuItem>View Details</DropdownMenuItem>
               <DropdownMenuItem>Edit</DropdownMenuItem>
               <DropdownMenuItem>Share</DropdownMenuItem>
-              <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
+              <DropdownMenuItem className="text-destructive">
+                Delete
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         {/* Status Progress Bar */}
-        <div className="space-y-2">
+        <div className="space-y-2 flex flex-col">
+          <div
+            className={
+              "flex items-center justify-right rounded-full space-between"
+            }
+            style={{ justifyContent: "space-between", lineHeight: 0 }}
+          >
+            <span className={`text-xs font-medium text-foreground`}>
+              {statusStyle.label}
+            </span>
+
+            <div>
+              <span className={`text-xs font-medium text-foreground`}>
+                {form.progress} %
+              </span>
+            </div>
+          </div>
           <div className="relative h-3 bg-muted rounded-full overflow-hidden">
-            <div 
+            <div
               className={`absolute inset-y-0 left-0 ${statusStyle.color} transition-all duration-300`}
               style={{ width: `${form.progress}%` }}
             />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-xs font-medium text-foreground">
-                {statusStyle.label}
-              </span>
-            </div>
           </div>
         </div>
 
@@ -144,10 +169,26 @@ export function FormCard({ form }: { form: FormData }) {
             <Calendar className="h-4 w-4 text-muted-foreground" />
             <span className="text-sm text-foreground">{form.createdAt}</span>
           </div>
-          
+          {form.progress !== 100 && (
+            <div className="flex items-center gap-2">
+              <Clock
+                className="h-4 w-4 text-muted-foreground"
+                style={{ color: "#db2626ff" }}
+              ></Clock>
+              <span
+                className="text-sm text-foreground"
+                style={{ color: "#db2626ff" }}
+              >
+                {form.deadline}
+              </span>
+            </div>
+          )}
           <div className="flex -space-x-2">
             {form.contributors.slice(0, 3).map((contributor) => (
-              <Avatar key={contributor.id} className="h-6 w-6 border-2 border-card">
+              <Avatar
+                key={contributor.id}
+                className="h-6 w-6 border-2 border-card"
+              >
                 <AvatarImage src={contributor.avatar} alt={contributor.name} />
                 <AvatarFallback className="text-xs font-semibold bg-primary text-primary-foreground">
                   {contributor.initials}

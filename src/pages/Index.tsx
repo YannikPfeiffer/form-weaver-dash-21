@@ -3,9 +3,53 @@ import { useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { StatCard } from "@/components/StatCard";
 import { FormCard, FormData } from "@/components/FormCard";
+import { Filter, Plus, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 // Mock data for demonstration
 const mockForms: FormData[] = [
+  {
+    id: "5",
+    name: "Apple Inc",
+    fileName: "apple-application.pdf",
+    type: "Application",
+    status: "in-progress",
+    progress: 25,
+    createdAt: "1/6/25",
+    deadline: "4/2/25",
+    contributors: [
+      { id: "1", name: "Kevin Liu", initials: "KL" },
+      { id: "2", name: "Linda Zhang", initials: "LZ" },
+    ],
+    customer: {
+      name: "Jennifer Wu",
+      company: "Apple Inc",
+      email: "j.wu@apple.com",
+    },
+    isOverdue: true,
+  },
+
+  {
+    id: "6",
+    name: "Meta Platforms",
+    fileName: "meta-survey.pdf",
+    type: "Survey",
+    status: "in-progress",
+    progress: 40,
+    createdAt: "10/1/24",
+    deadline: "5/5/25",
+    contributors: [
+      { id: "1", name: "Mark Taylor", initials: "MT" },
+      { id: "2", name: "Nancy Brown", initials: "NB" },
+      { id: "3", name: "Oscar Garcia", initials: "OG" },
+    ],
+    customer: {
+      name: "David Martinez",
+      company: "Meta Platforms",
+      email: "d.martinez@meta.com",
+    },
+  },
   {
     id: "1",
     name: "Microsoft Corporation",
@@ -14,7 +58,7 @@ const mockForms: FormData[] = [
     status: "in-progress",
     progress: 75,
     createdAt: "5/2/25",
-    deadline: "5/20/25, 5:00 PM",
+    deadline: "5/20/25",
     contributors: [
       { id: "1", name: "John Doe", initials: "JD" },
       { id: "2", name: "Jane Smith", initials: "JS" },
@@ -25,28 +69,28 @@ const mockForms: FormData[] = [
     customer: {
       name: "Sarah Johnson",
       company: "Microsoft Corp",
-      email: "s.johnson@microsoft.com"
-    }
+      email: "s.johnson@microsoft.com",
+    },
   },
   {
-    id: "2",
-    name: "Google LLC",
-    fileName: "google-contract.pdf",
-    type: "Contract",
-    status: "completed",
-    progress: 100,
-    createdAt: "4/15/25",
-    deadline: "5/1/25, 5:00 PM",
+    id: "4",
+    name: "Tesla Inc",
+    fileName: "tesla-agreement.docx",
+    type: "Agreement",
+    status: "review",
+    progress: 95,
+    createdAt: "1/30/25",
+    deadline: "5/28/25",
     contributors: [
-      { id: "1", name: "Alice Cooper", initials: "AC" },
-      { id: "2", name: "Bob Miller", initials: "BM" },
-      { id: "3", name: "Carol Davis", initials: "CD" },
+      { id: "1", name: "Helen Park", initials: "HP" },
+      { id: "2", name: "Ivan Petrov", initials: "IP" },
+      { id: "3", name: "Julia Roberts", initials: "JR" },
     ],
     customer: {
-      name: "Michael Chen",
-      company: "Google LLC",
-      email: "m.chen@google.com"
-    }
+      name: "Robert Kim",
+      company: "Tesla Inc",
+      email: "r.kim@tesla.com",
+    },
   },
   {
     id: "3",
@@ -56,7 +100,7 @@ const mockForms: FormData[] = [
     status: "review",
     progress: 95,
     createdAt: "4/20/25",
-    deadline: "6/10/25, 11:00 AM",
+    deadline: "6/10/25",
     contributors: [
       { id: "1", name: "David Lee", initials: "DL" },
       { id: "2", name: "Emma Watson", initials: "EW" },
@@ -66,68 +110,28 @@ const mockForms: FormData[] = [
     customer: {
       name: "Lisa Rodriguez",
       company: "Amazon Web Services",
-      email: "l.rodriguez@aws.com"
-    }
-  },
-  {
-    id: "4",
-    name: "Tesla Inc",
-    fileName: "tesla-agreement.docx",
-    type: "Agreement",
-    status: "review",
-    progress: 100,
-    createdAt: "1/30/25",
-    deadline: "5/28/25, 3:00 PM",
-    contributors: [
-      { id: "1", name: "Helen Park", initials: "HP" },
-      { id: "2", name: "Ivan Petrov", initials: "IP" },
-      { id: "3", name: "Julia Roberts", initials: "JR" },
-    ],
-    customer: {
-      name: "Robert Kim",
-      company: "Tesla Inc",
-      email: "r.kim@tesla.com"
-    }
-  },
-  {
-    id: "5",
-    name: "Apple Inc",
-    fileName: "apple-application.pdf",
-    type: "Application",
-    status: "in-progress",
-    progress: 25,
-    createdAt: "1/6/25",
-    deadline: "4/2/25, 1:20 PM",
-    contributors: [
-      { id: "1", name: "Kevin Liu", initials: "KL" },
-      { id: "2", name: "Linda Zhang", initials: "LZ" },
-    ],
-    customer: {
-      name: "Jennifer Wu",
-      company: "Apple Inc",
-      email: "j.wu@apple.com"
+      email: "l.rodriguez@aws.com",
     },
-    isOverdue: true,
   },
   {
-    id: "6",
-    name: "Meta Platforms",
-    fileName: "meta-survey.pdf",
-    type: "Survey",
-    status: "in-progress",
-    progress: 40,
-    createdAt: "10/1/24",
-    deadline: "5/5/25, 9:00 AM",
+    id: "2",
+    name: "Google LLC",
+    fileName: "google-contract.pdf",
+    type: "Contract",
+    status: "completed",
+    progress: 100,
+    createdAt: "4/15/25",
+    deadline: "5/1/25",
     contributors: [
-      { id: "1", name: "Mark Taylor", initials: "MT" },
-      { id: "2", name: "Nancy Brown", initials: "NB" },
-      { id: "3", name: "Oscar Garcia", initials: "OG" },
+      { id: "1", name: "Alice Cooper", initials: "AC" },
+      { id: "2", name: "Bob Miller", initials: "BM" },
+      { id: "3", name: "Carol Davis", initials: "CD" },
     ],
     customer: {
-      name: "David Martinez",
-      company: "Meta Platforms",
-      email: "d.martinez@meta.com"
-    }
+      name: "Michael Chen",
+      company: "Google LLC",
+      email: "m.chen@google.com",
+    },
   },
 ];
 
@@ -137,7 +141,7 @@ const Index = () => {
 
   const filteredForms = useMemo(() => {
     if (!searchQuery) return mockForms;
-    
+
     return mockForms.filter(
       (form) =>
         form.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -148,9 +152,15 @@ const Index = () => {
 
   const stats = useMemo(() => {
     const totalForms = mockForms.length;
-    const completedForms = mockForms.filter(form => form.status === "completed").length;
-    const inProgressForms = mockForms.filter(form => form.status === "in-progress").length;
-    const pendingForms = mockForms.filter(form => form.status === "pending" || form.status === "review").length;
+    const completedForms = mockForms.filter(
+      (form) => form.status === "completed"
+    ).length;
+    const inProgressForms = mockForms.filter(
+      (form) => form.status === "in-progress"
+    ).length;
+    const pendingForms = mockForms.filter(
+      (form) => form.status === "pending" || form.status === "review"
+    ).length;
 
     return {
       total: totalForms,
@@ -161,12 +171,11 @@ const Index = () => {
   }, []);
 
   const handleUpload = () => {
-    navigate('/upload');
+    navigate("/upload");
   };
 
   return (
     <DashboardLayout
-      title="Rapid Comply Dashboard"
       onSearch={setSearchQuery}
       onUpload={handleUpload}
       searchPlaceholder="Search for any form"
@@ -178,7 +187,8 @@ const Index = () => {
             Welcome back, Jane! 👋
           </h2>
           <p className="text-muted-foreground">
-            You have {stats.inProgress} forms in progress and {stats.pending} pending review.
+            You have {stats.inProgress} forms in progress and {stats.pending}{" "}
+            pending review.
           </p>
         </div>
 
@@ -224,11 +234,32 @@ const Index = () => {
             <h3 className="text-lg font-semibold text-foreground">
               {filteredForms.length} Forms
             </h3>
-            <div className="text-sm text-muted-foreground">
-              Showing {filteredForms.length} of {mockForms.length} forms
+            <div className="flex items-center gap-3">
+              <div className="relative w-96 max-w-sm">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder={"Search forms..."}
+                  className="pl-10 bg-background"
+                  style={{ background: "white" }}
+                  onChange={(e) => {}}
+                />
+              </div>
+
+              <Button variant="outline" size="sm" className="gap-2">
+                <Filter className="h-4 w-4" />
+                Add Filter
+              </Button>
+
+              <Button
+                onClick={handleUpload}
+                className="gap-2 bg-primary hover:bg-primary/90"
+              >
+                <Plus className="h-4 w-4" />
+                Upload New Doc
+              </Button>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {filteredForms.map((form) => (
               <FormCard key={form.id} form={form} />

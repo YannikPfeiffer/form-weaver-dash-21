@@ -42,7 +42,11 @@ const Upload = () => {
           clearInterval(interval);
           // Auto redirect to document processing
           setTimeout(() => {
-            navigate(`/document-processing?fileName=${encodeURIComponent(file?.name || "document")}`);
+            navigate(
+              `/document-processing?fileName=${encodeURIComponent(
+                file?.name || "document"
+              )}`
+            );
           }, 500);
           return 100;
         }
@@ -53,19 +57,23 @@ const Upload = () => {
 
   const handleSubmit = () => {
     if (uploadProgress === 100) {
-      navigate(`/document-processing?fileName=${encodeURIComponent(file?.name || "document")}`);
+      navigate(
+        `/document-processing?fileName=${encodeURIComponent(
+          file?.name || "document"
+        )}`
+      );
     }
   };
 
   const handleBack = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
-    <DashboardLayout title="Upload Document">
+    <DashboardLayout>
       <div className="max-w-2xl mx-auto space-y-6">
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           onClick={handleBack}
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
         >
@@ -79,7 +87,7 @@ const Upload = () => {
               Upload Document
             </CardTitle>
           </CardHeader>
-          
+
           <CardContent className="space-y-6">
             <div className="border-2 border-dashed border-border rounded-lg p-8 text-center">
               <UploadIcon className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
@@ -114,7 +122,9 @@ const Upload = () => {
                 {uploading && (
                   <div className="space-y-2 mb-4">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Uploading...</span>
+                      <span className="text-muted-foreground">
+                        Uploading...
+                      </span>
                       <span className="text-foreground">{uploadProgress}%</span>
                     </div>
                     <Progress value={uploadProgress} />
