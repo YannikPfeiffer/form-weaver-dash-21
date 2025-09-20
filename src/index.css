@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 249 50% 98%;
+    --foreground: 220 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 20% 96%;
+    --secondary-foreground: 220 20% 15%;
+
+    --muted: 220 20% 96%;
+    --muted-foreground: 220 10% 46%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 90%;
+    --input: 220 20% 96%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* Status colors */
+    --status-completed: 142 71% 45%;
+    --status-in-progress: 35 91% 65%;
+    --status-pending: 262 83% 58%;
+    --status-review: 262 83% 58%;
+
+    /* Success, warning, info variants */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 35 91% 65%;
+    --warning-foreground: 0 0% 100%;
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
+
+    /* Gradient definitions */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(220 91% 70%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 20% 98%));
+    --gradient-stats: linear-gradient(135deg, hsl(220 20% 98%), hsl(0 0% 100%));
+
+    /* Shadow definitions */
+    --shadow-card: 0 2px 8px -2px hsl(220 20% 20% / 0.08);
+    --shadow-elevated: 0 8px 25px -5px hsl(220 20% 20% / 0.12);
+    --shadow-glow: 0 0 20px hsl(217 91% 60% / 0.15);
+
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 20% 6%;
+    --foreground: 220 20% 95%;
+
+    --card: 220 20% 8%;
+    --card-foreground: 220 20% 95%;
+
+    --popover: 220 20% 8%;
+    --popover-foreground: 220 20% 95%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 20% 14%;
+    --secondary-foreground: 220 20% 95%;
+
+    --muted: 220 20% 14%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 14%;
+    --ring: 217 91% 60%;
+
+    /* Status colors for dark mode */
+    --status-completed: 142 71% 45%;
+    --status-in-progress: 35 91% 65%;
+    --status-pending: 262 83% 58%;
+    --status-review: 262 83% 58%;
+
+    /* Gradient definitions for dark mode */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(220 91% 70%));
+    --gradient-card: linear-gradient(145deg, hsl(220 20% 8%), hsl(220 20% 10%));
+    --gradient-stats: linear-gradient(135deg, hsl(220 20% 10%), hsl(220 20% 8%));
+
+    /* Shadow definitions for dark mode */
+    --shadow-card: 0 2px 8px -2px hsl(0 0% 0% / 0.25);
+    --shadow-elevated: 0 8px 25px -5px hsl(0 0% 0% / 0.35);
+    --shadow-glow: 0 0 20px hsl(217 91% 60% / 0.25);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
