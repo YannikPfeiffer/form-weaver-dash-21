@@ -7,10 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { Send, Users, Building2, Mail, Phone } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
-import { Document, pdfjs } from "react-pdf";
 import PDFViewer from "@/components/PdfViewer";
-// Use the .mjs worker from public folder
-pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const DocumentProcessing = () => {
   const [searchParams] = useSearchParams();
@@ -72,7 +69,11 @@ const DocumentProcessing = () => {
         {!isProcessed ? (
           <div className="flex flex-row h-full gap-6 items-center">
             <div className="w-1/2 h-full">
-              <PDFViewer fileUrl="assets/03_Lieferantenstammdaten.pdf" />
+              <PDFViewer
+                fileUrl={`${
+                  import.meta.env.BASE_URL
+                }assets/03_Lieferantenstammdaten.pdf`}
+              />
             </div>
             <div className="w-1/2 h-full">
               <Card className="shadow-card">
@@ -107,7 +108,11 @@ const DocumentProcessing = () => {
           <div className="flex-1 flex flex-col" style={{ height: "100%" }}>
             <div className="flex-1 flex gap-6">
               <div className="w-1/2" style={{ overflow: "hidden" }}>
-                <PDFViewer fileUrl="assets/03_Lieferantenstammdaten editted.pdf" />
+                <PDFViewer
+                  fileUrl={`${
+                    import.meta.env.BASE_URL
+                  }assets/03_Lieferantenstammdaten editted.pdf`}
+                />
               </div>
 
               {/* Right - Analysis Panel */}
