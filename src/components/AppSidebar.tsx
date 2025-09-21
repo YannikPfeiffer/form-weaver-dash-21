@@ -44,7 +44,7 @@ export function AppSidebar() {
         <div className="p-4 border-b border-border">
           <div className="flex items-center justify-center">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="/assets/Müller.png" alt="Hans Doe" />
+              <AvatarImage src="/assets/Müller.png" alt="Oliver" />
               <AvatarFallback className="bg-primary text-primary-foreground font-semibold text-xs">
                 JD
               </AvatarFallback>
@@ -96,6 +96,17 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem key={"logo-item"}>
+                <SidebarMenuButton asChild className="">
+                  <div className="flex items-center justify-center w-full h-full">
+                    <img
+                      src={"assets/logo.png"}
+                      alt="logo-alt"
+                      className="h-7 w-7 flex-shrink-0"
+                    />
+                  </div>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
