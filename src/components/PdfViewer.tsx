@@ -2,7 +2,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import React, { useState, useRef, useEffect } from "react";
 
 // Ensure pdfjs worker is set (important for react-pdf in TypeScript)
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `${import.meta.env.BASE_URL}pdf.worker.min.mjs`;
 
 interface PDFViewerProps {
   fileUrl: string;
