@@ -8,7 +8,7 @@ import { Send, Users, Building2, Mail, Phone } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 import { Document, pdfjs } from "react-pdf";
-
+import PDFViewer from "@/components/PdfViewer";
 // Use the .mjs worker from public folder
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -25,18 +25,18 @@ const DocumentProcessing = () => {
   const [chatMessage, setChatMessage] = useState("");
 
   const customerInfo = {
-    name: "Sarah Johnson",
-    company: "Microsoft Corporation",
-    email: "s.johnson@microsoft.com",
-    phone: "+1 (555) 123-4567",
+    name: "Max Müller",
+    company: "Tiefbau Müller GmbH",
+    email: "max.mueller@tiefbau-mueller.de",
+    phone: "+49 170 1234567",
   };
 
   const collaborators = [
-    { id: "1", name: "John Doe", initials: "JD", avatar: "" },
-    { id: "2", name: "Jane Smith", initials: "JS", avatar: "" },
-    { id: "3", name: "Mike Johnson", initials: "MJ", avatar: "" },
-    { id: "4", name: "Sarah Wilson", initials: "SW", avatar: "" },
-    { id: "5", name: "Tom Brown", initials: "TB", avatar: "" },
+    { id: "1", name: "John Doe", initials: "JD", avatar: "assets/P1.png" },
+    { id: "2", name: "Jane Smith", initials: "JS", avatar: "assets/P2.png" },
+    { id: "3", name: "Mike Johnson", initials: "MJ", avatar: "assets/P3.png" },
+    { id: "4", name: "Sarah Wilson", initials: "SW", avatar: "assets/P4.png" },
+    { id: "5", name: "Tom Brown", initials: "TB", avatar: "assets/P5.png" },
   ];
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const DocumentProcessing = () => {
         if (prev >= 100) {
           clearInterval(interval);
           setIsProcessed(true);
-          setAnswersProgress(Math.floor(Math.random() * 30) + 70); // 70-100%
+          setAnswersProgress(52);
           return 100;
         }
         return prev + 5;
@@ -66,44 +66,48 @@ const DocumentProcessing = () => {
     }, 2000);
   };
 
-  const handleBack = () => {
-    navigate("/upload");
-  };
-
   return (
     <DashboardLayout showSearch={false} showUploadButton={false}>
-      <div className="h-full flex flex-col space-y-6">
+      <div className="flex flex-col space-y-6 grow h-full">
         {!isProcessed ? (
-          <Card className="shadow-card">
-            <CardHeader className="text-center">
-              <div className="h-16 w-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-              <CardTitle className="text-2xl font-bold text-foreground">
-                Processing Document
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="text-center">
-                <p className="text-muted-foreground mb-4">
-                  Analyzing and auto-filling: <strong>{fileName}</strong>
-                </p>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Processing...</span>
-                    <span className="text-foreground">
-                      {processingProgress}%
-                    </span>
+          <div className="flex flex-row h-full gap-6 items-center">
+            <div className="w-1/2 h-full">
+              <PDFViewer fileUrl="assets/03_Lieferantenstammdaten.pdf" />
+            </div>
+            <div className="w-1/2 h-full">
+              <Card className="shadow-card">
+                <CardHeader className="text-center">
+                  <div className="h-16 w-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                  <CardTitle className="text-2xl font-bold text-foreground">
+                    Processing Document
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="text-center">
+                    <p className="text-muted-foreground mb-4">
+                      Analyzing and auto-filling: <strong>{fileName}</strong>
+                    </p>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          Processing...
+                        </span>
+                        <span className="text-foreground">
+                          {processingProgress}%
+                        </span>
+                      </div>
+                      <Progress value={processingProgress} />
+                    </div>
                   </div>
-                  <Progress value={processingProgress} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         ) : (
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col" style={{ height: "100%" }}>
             <div className="flex-1 flex gap-6">
-              {/* Left - PDF Viewer */}
-              <div className="w-1/2">
-                <Document file="assets/03_Lieferantenstammdaten (1).pdf" />
+              <div className="w-1/2" style={{ overflow: "hidden" }}>
+                <PDFViewer fileUrl="assets/03_Lieferantenstammdaten editted.pdf" />
               </div>
 
               {/* Right - Analysis Panel */}
@@ -209,14 +213,14 @@ const DocumentProcessing = () => {
                 </div>
 
                 {/* AI Assistant */}
-                <Card className="shadow-card flex-1">
+                <Card className="shadow-card flex-1 flex flex-col">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-base font-semibold text-foreground">
                       AI Assistant
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="flex flex-col h-full">
-                    <div className="flex-1 bg-muted/20 rounded-lg p-3 min-h-[200px] space-y-3 overflow-y-auto">
+                  <CardContent className="flex flex-col grow">
+                    <div className="flex-1 bg-muted/20 rounded-lg p-3 space-y-3 overflow-y-auto">
                       <div className="flex gap-3">
                         <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                           <span className="text-xs font-bold text-primary-foreground">
@@ -226,10 +230,11 @@ const DocumentProcessing = () => {
                         <div className="bg-background rounded-lg p-3 border flex-1">
                           <p className="text-sm text-foreground">
                             I've analyzed your document and auto-filled{" "}
-                            {answersProgress}% of the questions. I found
-                            information about environmental compliance and
-                            financial data that needs review. How can I help you
-                            today?
+                            {answersProgress}% of the questions.
+                          </p>
+                          <br></br>
+                          <p className="text-sm text-foreground">
+                            Do you have any questions regarding the document?
                           </p>
                         </div>
                       </div>
@@ -256,14 +261,13 @@ const DocumentProcessing = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-            </div>
-
-            <div className="border-t border-border bg-card/50 p-4 mt-6">
-              <div className="flex justify-end">
-                <Button onClick={handleSend} className="px-8">
-                  <Send className="h-4 w-4 mr-2" /> Send
-                </Button>
+                <div>
+                  <div className="flex justify-end">
+                    <Button onClick={handleSend} className="px-8">
+                      <Send className="h-4 w-4 mr-2" /> Send
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

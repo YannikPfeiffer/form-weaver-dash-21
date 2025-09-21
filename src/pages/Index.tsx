@@ -19,8 +19,8 @@ const mockForms: FormData[] = [
     createdAt: "1/6/25",
     deadline: "4/2/25",
     contributors: [
-      { id: "1", name: "Kevin Liu", initials: "KL" },
-      { id: "2", name: "Linda Zhang", initials: "LZ" },
+      { id: "1", name: "Kevin Liu", initials: "KL", avatar: "assets/P2.png" },
+      { id: "2", name: "Linda Zhang", initials: "LZ", avatar: "assets/P3.png" },
     ],
     customer: {
       name: "Jennifer Wu",
@@ -40,9 +40,14 @@ const mockForms: FormData[] = [
     createdAt: "10/1/24",
     deadline: "5/5/25",
     contributors: [
-      { id: "1", name: "Mark Taylor", initials: "MT" },
-      { id: "2", name: "Nancy Brown", initials: "NB" },
-      { id: "3", name: "Oscar Garcia", initials: "OG" },
+      { id: "1", name: "Mark Taylor", initials: "MT", avatar: "assets/P4.png" },
+      { id: "2", name: "Nancy Brown", initials: "NB", avatar: "assets/P5.png" },
+      {
+        id: "3",
+        name: "Oscar Garcia",
+        initials: "OG",
+        avatar: "assets/P1.png",
+      },
     ],
     customer: {
       name: "David Martinez",
@@ -60,10 +65,20 @@ const mockForms: FormData[] = [
     createdAt: "5/2/25",
     deadline: "5/20/25",
     contributors: [
-      { id: "1", name: "John Doe", initials: "JD" },
-      { id: "2", name: "Jane Smith", initials: "JS" },
-      { id: "3", name: "Mike Johnson", initials: "MJ" },
-      { id: "4", name: "Sarah Wilson", initials: "SW" },
+      { id: "1", name: "John Doe", initials: "JD", avatar: "assets/P2.png" },
+      { id: "2", name: "Jane Smith", initials: "JS", avatar: "assets/P4.png" },
+      {
+        id: "3",
+        name: "Mike Johnson",
+        initials: "MJ",
+        avatar: "assets/P5.png",
+      },
+      {
+        id: "4",
+        name: "Sarah Wilson",
+        initials: "SW",
+        avatar: "assets/P1.png",
+      },
       { id: "5", name: "Tom Brown", initials: "TB" },
     ],
     customer: {
@@ -83,7 +98,7 @@ const mockForms: FormData[] = [
     deadline: "5/28/25",
     contributors: [
       { id: "1", name: "Helen Park", initials: "HP" },
-      { id: "2", name: "Ivan Petrov", initials: "IP" },
+      { id: "2", name: "Ivan Petrov", initials: "IP", avatar: "assets/P1.png" },
       { id: "3", name: "Julia Roberts", initials: "JR" },
     ],
     customer: {
@@ -102,10 +117,10 @@ const mockForms: FormData[] = [
     createdAt: "4/20/25",
     deadline: "6/10/25",
     contributors: [
-      { id: "1", name: "David Lee", initials: "DL" },
-      { id: "2", name: "Emma Watson", initials: "EW" },
+      { id: "1", name: "David Lee", initials: "DL", avatar: "assets/P5.png" },
+      { id: "2", name: "Emma Watson", initials: "EW", avatar: "assets/P4.png" },
       { id: "3", name: "Frank Chen", initials: "FC" },
-      { id: "4", name: "Grace Kim", initials: "GK" },
+      { id: "4", name: "Grace Kim", initials: "GK", avatar: "assets/P3.png" },
     ],
     customer: {
       name: "Lisa Rodriguez",
@@ -123,8 +138,13 @@ const mockForms: FormData[] = [
     createdAt: "4/15/25",
     deadline: "5/1/25",
     contributors: [
-      { id: "1", name: "Alice Cooper", initials: "AC" },
-      { id: "2", name: "Bob Miller", initials: "BM" },
+      {
+        id: "1",
+        name: "Alice Cooper",
+        initials: "AC",
+        avatar: "assets/P2.png",
+      },
+      { id: "2", name: "Bob Miller", initials: "BM", avatar: "assets/P1.png" },
       { id: "3", name: "Carol Davis", initials: "CD" },
     ],
     customer: {
@@ -184,7 +204,7 @@ const Index = () => {
         {/* Welcome Message */}
         <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl p-6 border border-border">
           <h2 className="text-2xl font-bold text-foreground mb-2">
-            Welcome back, Jane! 👋
+            Welcome back, Hans! 👋
           </h2>
           <p className="text-muted-foreground">
             You have {stats.inProgress} forms in progress and {stats.pending}{" "}

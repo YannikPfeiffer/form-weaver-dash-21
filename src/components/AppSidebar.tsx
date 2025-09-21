@@ -44,7 +44,7 @@ export function AppSidebar() {
         <div className="p-4 border-b border-border">
           <div className="flex items-center justify-center">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="/avatars/user.jpg" alt="Jane Doe" />
+              <AvatarImage src="/assets/Müller.png" alt="Hans Doe" />
               <AvatarFallback className="bg-primary text-primary-foreground font-semibold text-xs">
                 JD
               </AvatarFallback>
@@ -58,19 +58,12 @@ export function AppSidebar() {
             <SidebarMenu className="space-y-2">
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    className="mx-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground w-10 h-10 p-0 flex items-center justify-center"
-                  >
+                  <SidebarMenuButton asChild className="">
                     <NavLink
                       to={item.url}
                       end
                       className={({ isActive }) =>
-                        `flex items-center justify-center w-full h-full ${
-                          isActive
-                            ? "bg-primary text-primary-foreground shadow-sm"
-                            : "text-foreground"
-                        }`
+                        `flex items-center justify-center w-full h-full `
                       }
                       title={item.title}
                     >
@@ -89,19 +82,12 @@ export function AppSidebar() {
             <SidebarMenu>
               {bottomNavigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    className="mx-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground w-10 h-10 p-0 flex items-center justify-center"
-                  >
+                  <SidebarMenuButton asChild className="">
                     <NavLink
                       to={item.url}
                       end
                       className={({ isActive }) =>
-                        `flex items-center justify-center w-full h-full ${
-                          isActive
-                            ? "bg-primary text-primary-foreground shadow-sm"
-                            : "text-foreground"
-                        }`
+                        `flex items-center justify-center w-full h-full `
                       }
                       title={item.title}
                     >
