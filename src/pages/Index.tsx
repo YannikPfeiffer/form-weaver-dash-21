@@ -6,6 +6,11 @@ import { FormCard, FormData } from "@/components/FormCard";
 import { Filter, Plus, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import avatar1 from "../../assets/P1.png";
+import avatar2 from "../../assets/P2.png";
+import avatar3 from "../../assets/P3.png";
+import avatar4 from "../../assets/P4.png";
+import avatar5 from "../../assets/P5.png";
 
 // Mock data for demonstration
 const mockForms: FormData[] = [
@@ -19,8 +24,8 @@ const mockForms: FormData[] = [
     createdAt: "1/6/25",
     deadline: "4/2/25",
     contributors: [
-      { id: "1", name: "Kevin Liu", initials: "KL", avatar: "assets/P2.png" },
-      { id: "2", name: "Linda Zhang", initials: "LZ", avatar: "assets/P3.png" },
+      { id: "1", name: "Kevin Liu", initials: "KL", avatar: avatar2 },
+      { id: "2", name: "Linda Zhang", initials: "LZ", avatar: avatar3 },
     ],
     customer: {
       name: "Jennifer Wu",
@@ -40,13 +45,13 @@ const mockForms: FormData[] = [
     createdAt: "10/1/24",
     deadline: "5/5/25",
     contributors: [
-      { id: "1", name: "Mark Taylor", initials: "MT", avatar: "assets/P4.png" },
-      { id: "2", name: "Nancy Brown", initials: "NB", avatar: "assets/P5.png" },
+      { id: "1", name: "Mark Taylor", initials: "MT", avatar: avatar4 },
+      { id: "2", name: "Nancy Brown", initials: "NB", avatar: avatar5 },
       {
         id: "3",
         name: "Oscar Garcia",
         initials: "OG",
-        avatar: "assets/P1.png",
+        avatar: avatar1,
       },
     ],
     customer: {
@@ -65,19 +70,19 @@ const mockForms: FormData[] = [
     createdAt: "5/2/25",
     deadline: "5/20/25",
     contributors: [
-      { id: "1", name: "John Doe", initials: "JD", avatar: "assets/P2.png" },
-      { id: "2", name: "Jane Smith", initials: "JS", avatar: "assets/P4.png" },
+      { id: "1", name: "John Doe", initials: "JD", avatar: avatar2 },
+      { id: "2", name: "Jane Smith", initials: "JS", avatar: avatar4 },
       {
         id: "3",
         name: "Mike Johnson",
         initials: "MJ",
-        avatar: "assets/P5.png",
+        avatar: avatar5,
       },
       {
         id: "4",
         name: "Sarah Wilson",
         initials: "SW",
-        avatar: "assets/P1.png",
+        avatar: avatar1,
       },
       { id: "5", name: "Tom Brown", initials: "TB" },
     ],
@@ -98,7 +103,7 @@ const mockForms: FormData[] = [
     deadline: "5/28/25",
     contributors: [
       { id: "1", name: "Helen Park", initials: "HP" },
-      { id: "2", name: "Ivan Petrov", initials: "IP", avatar: "assets/P1.png" },
+      { id: "2", name: "Ivan Petrov", initials: "IP", avatar: avatar1 },
       { id: "3", name: "Julia Roberts", initials: "JR" },
     ],
     customer: {
@@ -117,10 +122,10 @@ const mockForms: FormData[] = [
     createdAt: "4/20/25",
     deadline: "6/10/25",
     contributors: [
-      { id: "1", name: "David Lee", initials: "DL", avatar: "assets/P5.png" },
-      { id: "2", name: "Emma Watson", initials: "EW", avatar: "assets/P4.png" },
+      { id: "1", name: "David Lee", initials: "DL", avatar: avatar5 },
+      { id: "2", name: "Emma Watson", initials: "EW", avatar: avatar4 },
       { id: "3", name: "Frank Chen", initials: "FC" },
-      { id: "4", name: "Grace Kim", initials: "GK", avatar: "assets/P3.png" },
+      { id: "4", name: "Grace Kim", initials: "GK", avatar: avatar3 },
     ],
     customer: {
       name: "Lisa Rodriguez",
@@ -142,9 +147,9 @@ const mockForms: FormData[] = [
         id: "1",
         name: "Alice Cooper",
         initials: "AC",
-        avatar: "assets/P2.png",
+        avatar: avatar2,
       },
-      { id: "2", name: "Bob Miller", initials: "BM", avatar: "assets/P1.png" },
+      { id: "2", name: "Bob Miller", initials: "BM", avatar: avatar1 },
       { id: "3", name: "Carol Davis", initials: "CD" },
     ],
     customer: {
