@@ -209,7 +209,7 @@ const Index = () => {
         {/* Welcome Message */}
         <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl p-6 border border-border">
           <h2 className="text-2xl font-bold text-foreground mb-2">
-            Welcome back, Hans! 👋
+            Welcome back, Oliver! 👋
           </h2>
           <p className="text-muted-foreground">
             You have {stats.inProgress} forms in progress and {stats.pending}{" "}
@@ -217,7 +217,6 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             title="Total Forms"
