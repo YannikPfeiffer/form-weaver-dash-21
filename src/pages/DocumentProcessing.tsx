@@ -10,6 +10,11 @@ import { useToast } from "@/hooks/use-toast";
 import PDFViewer from "@/components/PdfViewer";
 import pdfFile from "../../assets/03_Lieferantenstammdaten.pdf";
 import pdfFileEditted from "../../assets/03_Lieferantenstammdaten editted.pdf";
+import avatar1 from "../../assets/P1.png";
+import avatar2 from "../../assets/P2.png";
+import avatar3 from "../../assets/P3.png";
+import avatar4 from "../../assets/P4.png";
+import avatar5 from "../../assets/P5.png";
 
 const DocumentProcessing = () => {
   const [searchParams] = useSearchParams();
@@ -31,11 +36,11 @@ const DocumentProcessing = () => {
   };
 
   const collaborators = [
-    { id: "1", name: "John Doe", initials: "JD", avatar: "assets/P1.png" },
-    { id: "2", name: "Jane Smith", initials: "JS", avatar: "assets/P2.png" },
-    { id: "3", name: "Mike Johnson", initials: "MJ", avatar: "assets/P3.png" },
-    { id: "4", name: "Sarah Wilson", initials: "SW", avatar: "assets/P4.png" },
-    { id: "5", name: "Tom Brown", initials: "TB", avatar: "assets/P5.png" },
+    { id: "1", name: "John Doe", initials: "JD", avatar: avatar1 },
+    { id: "2", name: "Jane Smith", initials: "JS", avatar: avatar2 },
+    { id: "3", name: "Mike Johnson", initials: "MJ", avatar: avatar3 },
+    { id: "4", name: "Sarah Wilson", initials: "SW", avatar: avatar4 },
+    { id: "5", name: "Tom Brown", initials: "TB", avatar: avatar5 },
   ];
 
   useEffect(() => {
